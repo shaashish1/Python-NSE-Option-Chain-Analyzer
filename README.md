@@ -220,6 +220,8 @@ on [Mr. Sameer Dharaskar's Course](http://advancesharetrading.com/).
 
 - [requests](https://pypi.org/project/requests/) is used for accessing and retrieving data from the NSE website
 
+- [brotli](https://pypi.org/project/brotli/) is used for decoding data received from the NSE website
+
 - [stream-to-logger](https://pypi.org/project/streamtologger/) is used for debug logging
 
 - [tksheet](https://pypi.org/project/tksheet/) is used for the table containing the data
