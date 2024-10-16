@@ -60,6 +60,7 @@ class Nse:
         self.config_parser: configparser.ConfigParser = configparser.ConfigParser()
         self.create_config(new=True) if not os.path.isfile('NSE-OCA.ini') else None
         self.get_config()
+        self.log_file: Optional[TextIO] = None
         self.log() if self.logging else None
         self.units_str: str = 'in K' if self.option_mode == 'Index' else 'in 10s'
         self.output_columns: Tuple[str, str, str, str, str, str, str, str, str] = (
@@ -733,8 +734,15 @@ class Nse:
     # noinspection PyUnusedLocal
     def log(self, event: Optional[Event] = None) -> None:
         if self.first_run and self.logging or not self.logging:
-            streamtologger.redirect(target="NSE-OCA.log",
-                                    header_format="[{timestamp:%Y-%m-%d %H:%M:%S} - {level:5}] ")
+            try:
+                # noinspection PyProtectedMember,PyUnresolvedReferences
+                base_path: str = sys._MEIPASS
+                self.log_file = open('NSE-OCA.log', 'a', buffering=1)
+                sys.stdout = self.log_file
+                sys.stderr = self.log_file
+            except AttributeError:
+                streamtologger.redirect(target="NSE-OCA.log",
+                                        header_format="[{timestamp:%Y-%m-%d %H:%M:%S} - {level:5}] ")
             self.logging = True
             print('----------Logging Started----------')
 
@@ -757,7 +765,12 @@ class Nse:
             print('----------Logging Stopped----------')
             sys.stdout = self.stdout
             sys.stderr = self.stderr
-            streamtologger._is_redirected = False
+            try:
+                # noinspection PyProtectedMember,PyUnresolvedReferences
+                base_path: str = sys._MEIPASS
+                self.log_file.close()
+            except AttributeError:
+                streamtologger._is_redirected = False
             self.logging = False
             self.options.entryconfig(self.options.index(9), label="Debug Logging: Off")
             messagebox.showinfo(title="Debug Logging Disabled", message="Errors will not be logged.")
