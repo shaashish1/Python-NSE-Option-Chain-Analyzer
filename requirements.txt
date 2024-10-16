@@ -1,4 +1,4 @@
-pandas>=1.4.1
+pandas>=1.4.1,<=2.2.3
 requests>=2.28.0
 streamtologger>=2017.1
 tksheet>=5.3.2,<=6.3.5
