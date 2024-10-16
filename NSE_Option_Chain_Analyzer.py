@@ -50,8 +50,8 @@ class Nse:
         self.url_update: str = "https://api.github.com/repos/VarunS2002/" \
                                "Python-NSE-Option-Chain-Analyzer/releases/latest"
         self.headers: Dict[str, str] = {
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, '
-                          'like Gecko) Chrome/80.0.3987.149 Safari/537.36',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/130.0.0.0 Safari/537.36',
             'accept-language': 'en,gu;q=0.9,hi;q=0.8',
             'accept-encoding': 'gzip, deflate, br'}
         self.session: requests.Session = requests.Session()
@@ -143,7 +143,6 @@ class Nse:
         try:
             release_data: requests.Response = requests.get(self.url_update, headers=self.headers, timeout=5)
             latest_version: str = release_data.json()['tag_name']
-            float(latest_version)
         except Exception as err:
             print(err, sys.exc_info()[0], "21")
             if not auto:
@@ -919,6 +918,7 @@ class Nse:
         top_frame.columnconfigure(0, weight=1)
         top_frame.pack(fill="both", expand=True)
 
+        # noinspection PyTypeChecker
         self.sheet: tksheet.Sheet = tksheet.Sheet(top_frame, column_width=85, align="center",
                                                   headers=self.output_columns, header_font=("TkDefaultFont", 9, "bold"),
                                                   empty_horizontal=0, empty_vertical=20, header_height=35)
