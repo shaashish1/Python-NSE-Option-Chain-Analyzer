@@ -2,6 +2,34 @@
 
 <br>
 
+> # [5.6](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/releases/tag/5.6)
+
+## Bug Fix Update
+
+- Bug Fixes:
+    - Fixed `JSONDecodeError` caused by the server now using a different encoding which requires the `brotli` package to
+      be to installed to be able to decode.
+      This is what causes the "Failed to fetch symbols. The program will exit now exit." error.
+      Issue: [#62](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/issues/62)
+      , [#65](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/issues/65)
+      , [#69](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/issues/69)
+      , [#70](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/issues/70)
+    - Fixed `TypeError` caused by breaking change in the newer versions of `tksheet`.
+      Issue: [#64](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/issues/64)
+      , [#67](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/issues/67)
+    - Fixed potential crash if you try to enable logging while running the `.exe` file
+- Code changes:
+    - Updated request headers
+    - Minor code improvements
+- Updated `requirements.txt`:
+    - Added `brotli` to library to support decoding data from NSE in the `br` encoding format
+    - Updated `requests` library version to exclude known vulnerable versions
+    - Updated `pandas` library version to prevent breaking changes in the future
+- Updated documentation:
+    - Added `brotli` in dependencies
+
+<br>
+
 > # [5.5](https://github.com/VarunS2002/Python-NSE-Option-Chain-Analyzer/releases/tag/5.5)
 
 ## Bug Fix Update
